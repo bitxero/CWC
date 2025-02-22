@@ -13,33 +13,32 @@ darr_t create_darr() {
 	return darr;
 }
 
-int push_darr(darr_t darr, int val) {
-	if (darr.darr == NULL) { return 0; }
-	if (darr.len > darr.cap) { return 0; }
+int push_darr(darr_t *darr, int val) {
+	if (darr->darr == NULL) { return 0; }
+	if (darr->len > darr->cap) { return 0; }
 
-	if (darr.len == darr.cap) {
-		darr.cap *= 2;
-		int *new_darr = (int *)malloc(sizeof(int) * darr.cap);
+	if (darr->len == darr->cap) {
+		darr->cap *= 2;
+		int *new_darr = (int *)malloc(sizeof(int) * darr->cap);
 		if (new_darr == NULL) {
-			darr.cap /= 2;
+			darr->cap /= 2;
 			return 0;
 		}
-		for (int i = 0; i < darr.len; i++) {
-			new_darr[i] = darr.darr[i];
+		for (int i = 0; i < darr->len; i++) {
+			new_darr[i] = darr->darr[i];
 		}
-		free(darr.darr);
-		darr.darr = new_darr;
+		free(darr->darr);
+		darr->darr = new_darr;
 	}
-	darr.darr[len] = val;
-	len++;		
-	}
+	darr->darr[darr->len] = val;
+	darr->len++;		
 	return 1;
 }
 
-int get_program_state(int argc, char **argv, darr_t darr) {
+int get_program_state(int argc, char **argv, darr_t *darr) {
 	int state = 0;
 	int scan_flgs = 1;
-	for (int i = 0; i < argc; i++) {
+	for (int i = 1; i < argc; i++) {
 		int len = strlen(argv[i]);
 		if (argv[i][0] == '-' && scan_flgs) {
 			if (len < 2) {

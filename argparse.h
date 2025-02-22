@@ -11,6 +11,7 @@ enum states {
 	BYTES = 1,
 };
 
-int get_program_state(int argc, char **argv, int *file_count, int *files);
+int get_program_state(int argc, char **argv, darr_t *darr);
+darr_t create_darr();
 
 #endif
