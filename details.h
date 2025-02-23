@@ -4,8 +4,9 @@
 
 typedef struct {
     long bytes;
+	char ok;
 } details_t;
 
-details_t file_details(FILE *fp);
+details_t file_details(char *fname);
 details_t stdin_details();
 #endif 
