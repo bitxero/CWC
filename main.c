@@ -20,10 +20,12 @@ int main(int argc, char **argv) {
 		return 2;
 	}
 	
+	report_header(program_state);
+
 	if (darr.len == 0) {
 		details_t details = stdin_details();
 		free(darr.darr);
-		// printf("%ld", details.bytes);
+		report(details, program_state, "");
 		return 0;
 	}
 
@@ -31,7 +33,7 @@ int main(int argc, char **argv) {
 		details_t details;
 		if (!strcmp(argv[darr.darr[i]], "-")) {
 			details = stdin_details();
-			// printf("%ld", details.bytes);
+			report(details, program_state, "-");
 			continue;
 		}
 		int path_state = is_file(argv[darr.darr[i]]);
@@ -43,7 +45,8 @@ int main(int argc, char **argv) {
 			continue;
 		}
 		details = file_details(argv[darr.darr[i]]);
-		printf("%ld\n", details.bytes);
+		report(details, program_state, argv[darr.darr[i]]);
+
 	}
 
 	if (darr.darr != NULL) { free(darr.darr); }

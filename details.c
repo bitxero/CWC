@@ -29,3 +29,13 @@ details_t stdin_details() {
 
     return dtls;
 }
+
+void report(details_t details, int state, char *fname) {
+	if (state & 1) { printf(" %-10ld", details.bytes); }
+	printf("\t%s\n", fname);
+}
+
+void report_header(int state) {
+	if (state | 1) { printf(" %-10s", "bytes"); }
+	printf("\tfile name\n");
+}

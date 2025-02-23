@@ -9,4 +9,7 @@ typedef struct {
 
 details_t file_details(char *fname);
 details_t stdin_details();
+void report(details_t details, int state, char *fname);
+void report_header(int state);
+
 #endif 
