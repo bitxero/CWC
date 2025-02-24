@@ -10,6 +10,7 @@ typedef struct {
 enum states {
 	BYTES = 1,
 	CHARS = 2,
+	NLINES = 4,
 };
 
 int get_program_state(int argc, char **argv, darr_t *darr);

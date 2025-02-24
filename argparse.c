@@ -52,6 +52,8 @@ int get_program_state(int argc, char **argv, darr_t *darr) {
 					state |= BYTES;
 				}else if (!strcmp(argv[i], "--chars")) {
 					state |= CHARS;
+				}else if (!strcmp(argv[i], "--lines")) {
+					state |= NLINES;
 				}else {
 					printf("Invalid argument: %s\n", argv[i]);
 					return -1;
@@ -64,6 +66,9 @@ int get_program_state(int argc, char **argv, darr_t *darr) {
 							break;
 						case 'c':
 							state |= CHARS;
+							break;
+						case 'l':
+							state |= NLINES;
 							break;
 						default:
 							printf("Invalid argument: -%c\n", argv[i][j]);

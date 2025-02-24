@@ -5,6 +5,7 @@
 typedef struct {
     long bytes;
 	long chars;
+	long nlines;
 	char ok;
 } details_t;
 
