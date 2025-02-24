@@ -4,6 +4,7 @@
 
 typedef struct {
     long bytes;
+	long chars;
 	char ok;
 } details_t;
 

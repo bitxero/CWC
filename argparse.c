@@ -14,12 +14,14 @@ darr_t create_darr() {
 }
 
 int push_darr(darr_t *darr, int val) {
+	// push errors
 	if (darr->darr == NULL) { return 0; }
 	if (darr->len > darr->cap) { return 0; }
-
+	// extend the array
 	if (darr->len == darr->cap) {
 		darr->cap *= 2;
 		int *new_darr = (int *)malloc(sizeof(int) * darr->cap);
+		// extention error
 		if (new_darr == NULL) {
 			darr->cap /= 2;
 			return 0;
@@ -48,6 +50,8 @@ int get_program_state(int argc, char **argv, darr_t *darr) {
 				if (len < 3) { scan_flgs = 0; } // end of flags
 				if (!strcmp(argv[i], "--bytes")) {
 					state |= BYTES;
+				}else if (!strcmp(argv[i], "--chars")) {
+					state |= CHARS;
 				}else {
 					printf("Invalid argument: %s\n", argv[i]);
 					return -1;
@@ -55,8 +59,11 @@ int get_program_state(int argc, char **argv, darr_t *darr) {
 			} else {
 				for (int j = 1; j < len; j++) {
 					switch(argv[i][j]) {
-						case 'c':
+						case 'b':
 							state |= BYTES;
+							break;
+						case 'c':
+							state |= CHARS;
 							break;
 						default:
 							printf("Invalid argument: -%c\n", argv[i][j]);
